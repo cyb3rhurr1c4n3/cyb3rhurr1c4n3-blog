@@ -22,7 +22,7 @@ jobs:
               uses: peaceiris/actions-hugo@v3
               with:
                   hugo-version: "latest"
-                  extended: true
+                  extended: true # ← BẮT BUỘC cho Blowfish
 
             - name: Build
               run: hugo --minify
