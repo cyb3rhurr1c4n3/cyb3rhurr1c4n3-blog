@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>XFF on Cyb3r Hurr1c4n3&#39;s Blog</title>
+    <link>//localhost:1313/tags/xff/</link>
+    <description>Recent content in XFF on Cyb3r Hurr1c4n3&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</managingEditor>
+    <webMaster>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</webMaster>
+    <copyright>&amp;copy; 2026 Cyb3r Hurr1c4n3. All Rights Reserved.</copyright>
+    <lastBuildDate>Sun, 22 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/xff/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Crack The Gate 2</title>
+      <link>//localhost:1313/write-ups/pico-ctf/crack-the-gate-2/</link>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <author>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</author>
+      <guid>//localhost:1313/write-ups/pico-ctf/crack-the-gate-2/</guid>
+      <description>Summary</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/write-ups/pico-ctf/crack-the-gate-2/features.png" />
+    </item>
+    
+    <item>
+      <title>Crack The Gate 3</title>
+      <link>//localhost:1313/write-ups/pico-ctf/crack-the-gate-3/</link>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <author>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</author>
+      <guid>//localhost:1313/write-ups/pico-ctf/crack-the-gate-3/</guid>
+      <description>Summary</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/write-ups/pico-ctf/crack-the-gate-3/features.png" />
+    </item>
+    
+    <item>
+      <title>Crack The Gate 4</title>
+      <link>//localhost:1313/write-ups/pico-ctf/crack-the-gate-4/</link>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <author>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</author>
+      <guid>//localhost:1313/write-ups/pico-ctf/crack-the-gate-4/</guid>
+      <description>Summary</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/write-ups/pico-ctf/crack-the-gate-4/features.png" />
+    </item>
+    
+  </channel>
+</rss>
