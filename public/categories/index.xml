@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Cyb3r Hurr1c4n3&#39;s Blog</title>
-    <link>/categories/</link>
+    <link>https://cyb3rhurr1c4n3.github.io/categories/</link>
     <description>Recent content in Categories on Cyb3r Hurr1c4n3&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</managingEditor>
     <webMaster>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</webMaster>
     <copyright>&amp;copy; 2026 Cyb3r Hurr1c4n3. All Rights Reserved.</copyright>
-    <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://cyb3rhurr1c4n3.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Write-Ups</title>
-      <link>/categories/write-ups/</link>
+      <link>https://cyb3rhurr1c4n3.github.io/categories/write-ups/</link>
       <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
       <author>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</author>
-      <guid>/categories/write-ups/</guid>
+      <guid>https://cyb3rhurr1c4n3.github.io/categories/write-ups/</guid>
       <description></description>
       
     </item>
