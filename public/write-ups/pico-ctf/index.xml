@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cyb3r Hurr1c4n3&#39;s Blog</title>
-    <link>http://localhost:1313/write-ups/pico-ctf/</link>
+    <link>https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/write-ups/pico-ctf/</link>
     <description>Recent content on Cyb3r Hurr1c4n3&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</managingEditor>
     <webMaster>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</webMaster>
     <copyright>&amp;copy; 2026 Cyb3r Hurr1c4n3. All Rights Reserved.</copyright>
-    <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/write-ups/pico-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/write-ups/pico-ctf/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Crack The Gate 2</title>
-      <link>http://localhost:1313/write-ups/pico-ctf/crack-the-gate-2/</link>
+      <link>https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/write-ups/pico-ctf/crack-the-gate-2/</link>
       <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
       <author>vobao8682@gmail.com (Cyb3r Hurr1c4n3)</author>
-      <guid>http://localhost:1313/write-ups/pico-ctf/crack-the-gate-2/</guid>
+      <guid>https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/write-ups/pico-ctf/crack-the-gate-2/</guid>
       <description>Bypass IP-based rate limiting via X-Forwarded-For spoofing to brute-force credentials without being blocked.</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/write-ups/pico-ctf/crack-the-gate-2/features.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/write-ups/pico-ctf/crack-the-gate-2/features.png" />
     </item>
     
   </channel>
