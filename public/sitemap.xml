@@ -39,6 +39,16 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/personal-projects/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/personal-projects/phantom-loader/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/write-ups/hack-the-box/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
