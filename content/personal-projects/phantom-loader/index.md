@@ -1,5 +1,5 @@
 ---
-title: "Defense Evasion: Bypassing Windows Defender Antivirus in 2026 via DLL Sideloading, Trusted Binary, VBScript Relay and LNK Delivery"
+title: "Defense Evasion - Bypassing Windows Defender Antivirus in 2026 via DLL Sideloading, Trusted Binary, VBScript Relay and LNK Delivery"
 date: 2026-04-14
 lastmod: 2026-04-14
 description: A full walkthrough of building Phantom Loader - a proof-of-concept Initial Access loader that bypasses Windows Defender Antivirus in 2026 via RC4-encrypted shellcode, DLL Sideloading with a Microsoft-signed binary, VBScript relay, and LNK-based delivery.
@@ -10,9 +10,11 @@ categories:
 draft: false
 ---
 
-> **GitHub:** [cyb3rhurr1c4n3/phantom-loader](https://github.com/cyb3rhurr1c4n3/phantom-loader/)  
-> **Stack:** `C, Python, VBScript, Havoc C2, Nginx`  
-> **Target:** Windows 11 + Windows Defender (Real-time Protection ✓, Cloud-delivered Protection ✓, Automatic Sample Submission ✗)
+> **GitHub** - [cyb3rhurr1c4n3/phantom-loader](https://github.com/cyb3rhurr1c4n3/phantom-loader/)
+
+> **Stack** - C | Python | VBScript | Havoc C2 | Nginx
+
+> **Target** - Windows 11 + Windows Defender (Real-time Protection ✅, Cloud-delivered Protection ✅, Automatic Sample Submission ❌)
 
 ---
 
@@ -318,7 +320,7 @@ C:\\Windows\\System32\\bcrypt.dll.BCryptOpenAlgorithmProvider")
 
 Windows resolves the forward to System32 at load time - no need to copy the original DLL anywhere.
 
-> **A mistake I made early on:** I initially copied the real DLL into the working directory with an `_orig.dll` suffix and forwarded to that. Defender caught it immediately - a system DLL existing outside of System32 is an obvious IOC. You have to forward directly to `C:\Windows\System32\<dll>.dll`.
+**A mistake I made early on:** I initially copied the real DLL into the working directory with an `_orig.dll` suffix and forwarded to that. Defender caught it immediately - a system DLL existing outside of System32 is an obvious IOC. You have to forward directly to `C:\Windows\System32\<dll>.dll`.
 
 ### The loader itself
 
@@ -396,13 +398,13 @@ But I still needed a believable entry point for the victim.
 
 ### The pretext - Social Engineering
 
-I designed the delivery around an internal HR email announcing a company-wide layoff - **Phase 1 Workforce Reduction 2026**. The email comes from the "HR Department", marks the document as highly confidential, and asks the recipient to confirm by 17:00 today. Fear of losing your job is a powerful trigger - it pushes people to act immediately without stopping to think.
+I designed the delivery around an internal HR email announcing a company-wide layoff - **Phase 1 Workforce Reduction 2026**. The email comes from the **HR Department**, marks the document as highly confidential, and asks the recipient to confirm by 17:00 today. Fear of losing your job is a powerful trigger - it pushes people to act immediately without stopping to think.
 
-The payload is delivered as a password-protected ZIP via a download link, not as a direct email attachment. This sidesteps Secure Email Gateway sandboxes that aggressively scan attachments. The password (`layoff2026`) is included in the email body itself - which also reinforces the illusion that this is a legitimate, carefully secured internal document.
+The payload is delivered as a password-protected ZIP via a download link, not as a direct email attachment. This sidesteps **Secure Email Gateway** sandboxes that aggressively scan attachments. The password (`layoff2026`) is included in the email body itself - which also reinforces the illusion that this is a legitimate, carefully secured internal document.
 
 - Here is the actual email that I sent
 
-```
+```markdown
 Subject: [URGENT] Layoff List - Phase 1 Workforce Reduction 2026 - HR Department
 
 Dear Colleagues,
@@ -504,7 +506,7 @@ I also renamed the hidden folder from `temp` to `microsoft-update-cache` - not s
       └── 📄 layoff-list.pdf          ← Decoy document
 ```
 
-The full bundle gets zipped with a password via 7-Zip, uploaded to the VPS file server, and linked in the phishing email. That's the complete delivery chain - and it worked, I actually bypass Windows Defender Antivirus (latest) with this (_see the demo section on Github_). I finally got a clean demo recorded and the bypass confirmed. Honestly, I slept well that night.
+The full bundle gets zipped with a password via 7-Zip, uploaded to the VPS file server, and linked in the phishing email. That's the complete delivery chain - and it worked, I **_actually bypass Windows Defender Antivirus (latest)_** with this (_see the demo section on Github_). I finally got a clean demo recorded and the bypass confirmed. Honestly, I slept well that night.
 
 Althought this payload bundle is good, it's not perfect, there are always something to be improve.
 
@@ -512,17 +514,17 @@ Althought this payload bundle is good, it's not perfect, there are always someth
 
 A few things I learned the hard way or want to improve:
 
-**Isolate your dev and test environments properly.** The whole `version.dll` incident happened because my dev enviroment wasn't properly set up. Never let that happen again.
+- **Isolate your dev and test environments properly.** The whole `version.dll` incident happened because my dev enviroment wasn't properly set up. Never let that happen again.
 
-**Test DLL persistence, not just loadability.** Just because `DllMain` fires doesn't mean the DLL stays loaded long enough for your shellcode to complete. `crypt32.dll` taught me that. Always verify the full chain: load → shellcode runs → beacon appears on Teamserver.
+- **Test DLL persistence, not just loadability.** Just because `DllMain` fires doesn't mean the DLL stays loaded long enough for your shellcode to complete. `crypt32.dll` taught me that. Always verify the full chain: load → shellcode runs → beacon appears on Teamserver.
 
-**Process Monitor > dumpbin for finding candidates.** `dumpbin /imports` only shows static imports compiled into the binary. Dynamic `LoadLibrary` calls at runtime won't appear there. Process Monitor's `NAME NOT FOUND` filter catches everything at runtime, which is what actually matters.
+- **Process Monitor > dumpbin for finding candidates.** `dumpbin /imports` only shows static imports compiled into the binary. Dynamic `LoadLibrary` calls at runtime won't appear there. Process Monitor's `NAME NOT FOUND` filter catches everything at runtime, which is what actually matters.
 
 **Things I haven't solved yet but want to explore:**
 
-- MotW bypass - files from a ZIP inherit `Zone.Identifier`, which bumps EDR threat score. VHD/VHDX container smuggling is the most promising direction.
-- Indirect syscalls in the loader - currently still using Win32 API, which can be hooked by EDR at the `ntdll.dll` level.
-- Environmental keying - derive the RC4 decryption key from target-specific artifacts instead of hardcoding it, so the shellcode is useless outside the intended environment.
+- **MotW bypass** - files from a ZIP inherit `Zone.Identifier`, which bumps EDR threat score. VHD/VHDX container smuggling is the most promising direction.
+- **Indirect syscalls in the loader** - currently still using Win32 API, which can be hooked by EDR at the `ntdll.dll` level.
+- **Environmental keying** - derive the RC4 decryption key from target-specific artifacts instead of hardcoding it, so the shellcode is useless outside the intended environment.
 
 ---
 
