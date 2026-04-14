@@ -1,4 +1,14 @@
-# Defense Evasion - Bypassing Windows Defender Antivirus in 2026 via DLL Sideloading, Trusted Binary, VBScript Relay and LNK Delivery
+---
+title: "Defense Evasion: Bypassing Windows Defender Antivirus in 2026 via DLL Sideloading, Trusted Binary, VBScript Relay and LNK Delivery"
+date: 2026-04-14
+lastmod: 2026-04-14
+description: A full walkthrough of building Phantom Loader - a proof-of-concept Initial Access loader that bypasses Windows Defender Antivirus in 2026 via RC4-encrypted shellcode, DLL Sideloading with a Microsoft-signed binary, VBScript relay, and LNK-based delivery.
+summary: How I built a working AV bypass from scratch as a third-year security student - covering C2 infrastructure, shellcode encryption, DLL Sideloading, and delivery. Including the parts that went wrong.
+tags:
+categories:
+    - personal-projects
+draft: false
+---
 
 > **GitHub:** [cyb3rhurr1c4n3/phantom-loader](https://github.com/cyb3rhurr1c4n3/phantom-loader/)  
 > **Stack:** `C, Python, VBScript, Havoc C2, Nginx`  
