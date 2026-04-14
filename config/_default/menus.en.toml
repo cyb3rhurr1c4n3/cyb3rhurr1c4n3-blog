@@ -32,10 +32,14 @@
   weight = 40
 
 [[main]]
-  name = "Technical Blog"
-  pageRef = "technical-blog"
+  name = "Technical Blogs"
+  pageRef = "technical-blogs"
   weight = 50
 
+[[main]]
+  name = "Personal Projects"
+  pageRef = "personal-projects"
+  weight = 60
 
 #[[subnavigation]]
 #  name = "An interesting topic"

