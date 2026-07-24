@@ -1,21 +1,19 @@
 ---
-title: HackTheBox - Nibbles
+title: Nibbles
 date: 2026-07-24
 lastmod: 2026-07-24
 description: Exploit an arbitrary file upload vulnerability (CVE-2015-6967) in Nibbleblog 4.0.3 to gain a foothold, then escalate to root through a misconfigured, writable sudo script on HackTheBox's Nibbles machine.
 summary: Chain an unrestricted file upload in Nibbleblog 4.0.3 with a writable sudo script to go from anonymous user to root on HTB Nibbles.
-tags:
-    - hackthebox
-categories:
-    - write-ups
+tags: ["hackthebox"]
+categories: ["write-ups"]
 draft: false
 ---
 
 ## Overview
 
-> **Machine:** `Nibbles`
-> **OS:** Linux
-> **Difficulty:** Easy
+> **Machine:** `Nibbles`  
+> **OS:** Linux  
+> **Difficulty:** Easy  
 > **IP:** `10.129.200.170`
 
 ![](images/challange-info.png)
@@ -235,13 +233,11 @@ This spawns a root shell.
 
 ![](images/root-shell.png)
 
-From here it's straightforward - I read `/root/root.txt` to grab the final flag.
+From here it's straightforward - I read `/root/root.txt` to grab the final flag. Done!
 
 ```text
 root.txt: de5e5d6619862a8aa5b9b212314e0cdd
 ```
-
-Done!
 
 ---
 

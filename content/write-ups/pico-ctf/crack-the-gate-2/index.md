@@ -1,7 +1,7 @@
 ---
 title: "Crack The Gate 2"
 date: 2026-02-20
-lastmod: 2026-02-21
+lastmod: 2026-02-20
 description: "Bypass IP-based rate limiting using X-Forwarded-For header spoofing to brute-force credentials in PicoCTF Crack The Gate 2."
 summary: "Bypass IP-based rate limiting via X-Forwarded-For spoofing to brute-force credentials without being blocked."
 tags: ["picoctf", "web-exploitation"]
@@ -11,8 +11,7 @@ draft: false
 
 ## Overview
 
-> **Category:** Web Exploitation
-
+> **Category:** Web Exploitation  
 > **Difficulty:** Medium
 
 ![](images/challenge-info.png)
