@@ -1,5 +1,5 @@
 ---
-title: HackTheBox - Getting Started
+title: Getting Started
 date: 2026-08-11
 lastmod: 2026-08-11
 description: Exploit default credentials and a known arbitrary code execution vulnerability (CVE-2019-11231) in GetSimple CMS's theme editor to gain a foothold, then abuse a NOPASSWD sudo rule on /usr/bin/php to escalate to root on HackTheBox's Getting Started machine.
