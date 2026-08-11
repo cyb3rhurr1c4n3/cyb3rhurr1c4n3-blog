@@ -13,9 +13,9 @@ draft: false
 
 ## Overview
 
-> **Machine:** `Getting Started`
-> **OS:** Linux
-> **Difficulty:** Easy
+> **Machine:** `Getting Started`  
+> **OS:** Linux  
+> **Difficulty:** Easy  
 > **IP:** `10.129.100.231`
 
 ![](images/challange-info.jpg)
@@ -122,10 +122,8 @@ I navigate to the user's home directory and read the `user.txt` flag:
 
 ![](images/getting-user-flag.png)
 
-**user.txt**
-
 ```text
-7002d65b149b0a4d19132a66feed21d8
+user.txt: 7002d65b149b0a4d19132a66feed21d8
 ```
 
 This **netcat** dump shell isn't stable enough to comfortably continue, so I upgrade it to a fully interactive TTY shell, following the process from my own reference post, **[Shells, TTY, and SSH - A Practical Guide for Offensive Security](https://cyb3rhurr1c4n3.github.io/cyb3rhurr1c4n3-blog/technical-blogs/shells-tty-and-ssh/)**. With a full TTY shell in hand, I move on to privilege escalation to get `root.txt`.
@@ -156,9 +154,8 @@ Running it gives me a root session.
 
 From there, I read `/root/root.txt` to grab the final flag:
 
-**root.txt**
 ```text
-f1fba6e9f71efb2630e6e34da6387842
+root.txt: f1fba6e9f71efb2630e6e34da6387842
 ```
 
 Done!
